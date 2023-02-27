@@ -45,9 +45,25 @@ This file marks down all the questions raised in implementing the homeworks.
   
     > Actually, **most critical points are saddle points** instead of local minima, since more dimensions the data have, the harder there is a local minima.
 
-## Lecture 1: Introduction of Deep Learning
+## Lecture 1: Introduction of Deep Learning & Training Tips
 
-### Question 1: Device ---- GPU or CPU?
+### Question 1: Why we want "Deep" network, not "Fat" network?
+
+Here are the experimental data:
+
+> <img src="/home/carolt/SelfEducating/Artificial_Intelligence/ML2022-Spring/Notes/images/image-20230226164746638.png" alt="image-20230226164746638" style="zoom:80%;" />
+>
+> With the same size of model, "Deep" model is more effective than "Fat" model.
+
+So, why "Deep" network is more effective than "Fat" network with same parameters?
+
+This is because a carefully designed deep network has much more complex and regular structure.
+
+> <img src="/home/carolt/SelfEducating/Artificial_Intelligence/ML2022-Spring/Notes/images/image-20230226165412199.png" alt="image-20230226165412199" style="zoom:80%;" />
+>
+> For example, to represent 8 straight pieces of lines, deep network could use only 6 ReLU neurons while fat network has to use at least 8 neurons. And if deep network has K layers, which layer has 2 neurons, it is able to represent 2^k pieces.
+
+### Question 2: Device ---- GPU or CPU?
 
 Tensors & modules will be computed with CPU by default.
 
@@ -68,7 +84,7 @@ So, which device to choose to finish the deep learning tour?
 + RTX 2060, GTX 1660 / 1060 / 1050: personal independent GPU. Available for local debug and test. Price ranges from 1700 yuan to 459 yuan(including second hand ones). Satisfying for some potential game demands in future.
 + Cloud GPUs: using or renting resources from labs or companies. Dedicated for experiment or work demands. Free or cheap in a short term, while long-term renting cost is a big budget. Relatively more inconvenient when having to share resources with others.
 
-### Question 2: Training & testing neural network
+### Question 3: Training & testing neural network
 
 There are 4 steps to train and test a neural network.
 
@@ -110,7 +126,11 @@ There are 4 steps to train and test a neural network.
 
 3. Loss function.
 
-   See the briefly introduction in the pdf tutorial.
+   In classification problem, compared to MSE, **cross-entropy** is widely used as the loss function. And **in PyTorch**, cross-entropy is combined with **softmax** as a set of functions, so we hardly see softmax process in the programs.
+
+   > <img src="/home/carolt/SelfEducating/Artificial_Intelligence/ML2022-Spring/Notes/images/image-20230226153905448.png" alt="image-20230226153905448" style="zoom:80%;" />
+
+   We can see that the error surface of cross-entropy has a much wider range, which means the training process will be faster. For example, the gradient of left-top position of MSE is very small, causing the training **stuck in the beginning**.
 
 4. Optimization algorithm.
 
@@ -167,4 +187,8 @@ There are 4 steps to train and test a neural network.
    > + Finally, why do we need validation test?
    >
    >   Since we can not expose the testing data to our model, which is an action of cheating, we have to split a part of training data to replace the position of testing data.
+   >   
+   >   Sometimes overfitting can't be avoided even if validation test is used. This is because validation set is a "bad" set, which means it has a much different distribution from testing set. One solution is decreasing the number of training models.
+
+## Lecture 2: Classification
 
