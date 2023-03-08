@@ -24,7 +24,7 @@ This file marks down all the questions raised in implementing the homeworks.
 
 + Actual optimization in training:
 
-  <img src="/home/carolt/SelfEducating/Artificial_Intelligence/ML2022-Spring/Notes/images/image-20230204003128303.png" alt="image-20230204003128303" style="zoom:80%;" />
+  <img src="/home/carolt/SelfEducating/Artificial_Intelligence/ML2022-Spring/Notes/images/image-20230204003128303.png" alt="image-20230204003128303" style="zoom:70%;" />
 
   + Batch: The computation unit to update parameters.
   + Shuffle: Shuffle after each epoch to make batches different among epochs.
@@ -89,6 +89,38 @@ In classification problem, compared to MSE, **cross-entropy** is widely used as 
 
 We can see that the error surface of cross-entropy has a much wider range, which means the training process will be faster. For example, the gradient of left-top position of MSE is very small, causing the training **stuck in the beginning**.
 
+### Question 4: What is layer normalization? What is batch normalization? What is the difference?
+
+Here is the introduction of [layer normalization](https://arxiv.org/abs/1607.06450) and [batch normalization](https://arxiv.org/abs/1502.03167).
+
++++++
+
+Why we need feature normalization?
+
+> Take linear model as an example:
+>
+> <img src="/home/carolt/SelfEducating/Artificial_Intelligence/ML2022-Spring/Notes/images/image-20230304143014876.png" alt="image-20230304143014876" style="zoom:67%;" />
+>
+> The scale of different dimensions of feature vector has a big impact on the gradient of parameters. In general, feature normalization makes gradient descent converge faster.
+
+What is feature normalization?
+
+> <img src="/home/carolt/SelfEducating/Artificial_Intelligence/ML2022-Spring/Notes/images/image-20230304143657709.png" alt="image-20230304143657709" style="zoom:67%;" />
+>
+> Note that the mean and standard deviation are calculated with all data on a specific dimension.
+
+Besides, applying normalization before every activation layer may help.
+
+Why use batch normalization?
+
+> Since the number of data is too large to be transfered into GPU and processed simultaneously. So the common solution is taking only one batch of data to do normalization, which is called batch normalization.
+
+Other popular **feature normalization** methods:
+
+> <img src="/home/carolt/SelfEducating/Artificial_Intelligence/ML2022-Spring/Notes/images/image-20230304142719111.png" alt="image-20230304142719111" style="zoom:80%;" />
+
++++++
+
 
 
 ## Lecture 1: Introduction of Deep Learning
@@ -97,7 +129,7 @@ We can see that the error surface of cross-entropy has a much wider range, which
 
 Here are the experimental data:
 
-> <img src="/home/carolt/SelfEducating/Artificial_Intelligence/ML2022-Spring/Notes/images/image-20230226164746638.png" alt="image-20230226164746638" style="zoom:80%;" />
+> <img src="/home/carolt/SelfEducating/Artificial_Intelligence/ML2022-Spring/Notes/images/image-20230226164746638.png" alt="image-20230226164746638" style="zoom:60%;" />
 >
 > With the same size of model, "Deep" model is more effective than "Fat" model.
 
@@ -105,7 +137,7 @@ So, why "Deep" network is more effective than "Fat" network with same parameters
 
 This is because a carefully designed deep network has much more complex and regular structure.
 
-> <img src="/home/carolt/SelfEducating/Artificial_Intelligence/ML2022-Spring/Notes/images/image-20230226165412199.png" alt="image-20230226165412199" style="zoom:80%;" />
+> <img src="/home/carolt/SelfEducating/Artificial_Intelligence/ML2022-Spring/Notes/images/image-20230226165412199.png" alt="image-20230226165412199" style="zoom:60%;" />
 >
 > For example, to represent 8 straight pieces of lines, deep network could use only 6 ReLU neurons while fat network has to use at least 8 neurons. And if deep network has K layers, which layer has 2 neurons, it is able to represent 2^k pieces.
 
@@ -166,7 +198,7 @@ Here are the **General guide** and schemes to accomplish simple tasks:
 >     + Dropout.
 >   + Mismatch: Training data and testing data have different distribution. A lecture will focus on and discuss about this topic.
 >
-> + Finally, why do we need validation test?
+> + Finally, why do we need **validation test**?
 >
 >   Since we can not expose the testing data to our model, which is an action of cheating, we have to split a part of training data to replace the position of testing data.
 >   
@@ -247,3 +279,9 @@ Note that all of these procedures can be considered as matrix computation, which
 + Self-attention for Graph:
 
   Attention reflects the relation among vectors. So if we consider edges as the only attention to connected nodes, the **adjacency matrix can represent the attention matrix**. And this thought build another GNN.
+
+## Lecture 5: Sequence to Sequence
+
+[Grammar as a Foreign Language](https://arxiv.org/abs/1412.7449): seq2seq for syntactic parsing.
+
+> <img src="/home/carolt/SelfEducating/Artificial_Intelligence/ML2022-Spring/Notes/images/image-20230306122409809.png" alt="image-20230306122409809" style="zoom:67%;" />
